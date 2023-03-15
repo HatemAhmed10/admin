@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "95521192834",
+    "project_id": "learn-app-be9eb",
+    "storage_bucket": "learn-app-be9eb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95521192834:android:09665e24a621681adbed9b",
+        "android_client_info": {
+          "package_name": "com.example.admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95521192834-luu77hl6ld141i9r1na60o03lotpdmoa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDj2nqZc4d8uHDpeUqUSRlM2Jk7LNtbsi4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95521192834-luu77hl6ld141i9r1na60o03lotpdmoa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
