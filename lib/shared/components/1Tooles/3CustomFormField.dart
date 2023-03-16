@@ -19,6 +19,8 @@ Widget CustomFormField({
   OutlineInputBorder? focusedBorder,
 }) =>
     TextFormField(
+      maxLines: 50, // <-- SEE HERE
+      minLines: 1,
       controller: controller,
       cursorColor: cursorColor,
       keyboardType: type,
