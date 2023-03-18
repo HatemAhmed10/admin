@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-import '../../../data/models/1News_Model/News_Model.dart';
+import '../../../data/models/1Type/1News_Model/News_Model.dart';
 import 'News_State.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // To upload Image To Firebase
@@ -106,9 +106,8 @@ class News_Cubit extends Cubit<News_States> {
     Timestamp nowDate = Timestamp.now();
 
     var Id = FirebaseFirestore.instance
-        .collection('DataBase')
-        .doc('Table')
-        .collection('Users')
+      
+        .collection('News')
         .doc();
 
     NewsModel model = NewsModel(
@@ -119,8 +118,7 @@ class News_Cubit extends Cubit<News_States> {
     );
 
     FirebaseFirestore.instance
-        .collection('DataBase')
-        .doc("Table")
+     
         .collection("News")
         .doc(Id.id)
         .set(model.toMap())

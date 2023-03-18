@@ -5,9 +5,11 @@ import 'package:admin/shared/components/1Tooles/5Custom_Navigate.dart';
 
 import '../../../business_logic/1Choose_Type/Choose_Type_Cubit.dart';
 import '../../../business_logic/1Choose_Type/Choose_Type_State.dart';
+import '../../widgets/Test/test.dart';
 import '../3Types/1News/News_Home.dart';
 import '../3Types/2Learn/Learn_Home.dart';
 import '../3Types/3Quiz/Quiz_Home.dart';
+import '../3Types/4Choose_Subject/Choose_Subject.dart';
 
 class ChangeTypeScreen extends StatelessWidget {
   const ChangeTypeScreen({super.key});
@@ -56,10 +58,19 @@ class ChangeTypeScreen extends StatelessWidget {
                                 navigateTo(context, News_Home_Screen());
                                 break;
                               case 1:
-                                navigateTo(context, Learn_Home_Screen());
+                                navigateTo(
+                                    context,
+                                    Choose_Subject(
+                                      Next: "Learn",
+                                    ));
+                                // Choose_Subject());
                                 break;
                               case 2:
-                                navigateTo(context, Quiz_Home_Screen());
+                                navigateTo(
+                                    context, Choose_Subject(Next: "Quiz"));
+                                // context,
+                                // Choose_Subject());
+
                                 break;
                             }
                           },

@@ -61,8 +61,16 @@ dependencies:
   carousel_slider: ^4.2.1
   cloud_firestore: ^4.4.4
 
+  # Hive 
+  hive: 
+  hive_flutter: 
+  vertical_card_pager: ^1.5.0
 
+  video_player: 
+  
 dev_dependencies:
+  hive_generator:  
+  build_runner: 
   flutter_test:
     sdk: flutter
 
@@ -118,4 +126,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/Type_Screen/
-  
+    - assets/images/Type_Subject/
+    - assets/images/Splash_Screen/
+

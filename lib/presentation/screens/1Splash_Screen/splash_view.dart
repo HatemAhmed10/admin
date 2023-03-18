@@ -17,7 +17,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
   Timer? _timer;
 
   _startDelay() {
-    _timer = Timer(const Duration(seconds: 1), _goNext);
+    _timer = Timer(const Duration(seconds: 20), _goNext);
   }
 
   _goNext() {
@@ -33,10 +33,53 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManager.primary,
-      body: Center(
-          child: FadeInDown(
-              child: Image(image: AssetImage(ImageAssets.Admin_Image)))),
+      // backgroundColor: ColorManager.primary,
+      body: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 50,
+            ),
+            Expanded(
+              flex: 4,
+              child: FadeInDown(
+                child: Container(
+                  height: 350,
+                  width: double.infinity,
+                  margin: EdgeInsets.only(top: 10),
+                  clipBehavior: Clip.hardEdge,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                  child:
+                      Image(image: AssetImage(ImageAssets.Splash_Screen_Image)),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            Expanded(
+              flex: 1,
+              child: FadeInUp(
+                child: Text(
+                  "معا للتفوق",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w700,
+                    fontStyle: FontStyle.normal,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 50,
+            ),
+          ],
+        ),
+      ),
     );
   }
 

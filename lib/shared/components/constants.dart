@@ -1,7 +1,11 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
+
+import '../styles/assets_manager.dart';
+
 const kPrimaryColor = Color(0xff62FCD7);
-// const kNotesBox = 'notes_box';
+const kSubjectBox = 'subject_box';
 List<Color> kColors = const [
   Color(0xffAC3931),
   Color(0xffE5D352),
@@ -10,6 +14,14 @@ List<Color> kColors = const [
   Color(0xff482C3D),
 ];
 
+List<AssetImage> KImage = [
+  AssetImage(ImageAssets.English_Image),
+  AssetImage(ImageAssets.Mathematics_Image),
+  AssetImage(ImageAssets.Science_Image),
+  AssetImage(ImageAssets.Science2_Image),
+  AssetImage(ImageAssets.Destination_Image),
+  AssetImage(ImageAssets.Presentation_Image),
+];
 
 
 // // POST
