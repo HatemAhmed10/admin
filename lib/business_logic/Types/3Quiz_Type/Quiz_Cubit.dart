@@ -105,6 +105,19 @@ class Quiz_Cubit extends Cubit<Quiz_States> {
         dectitle: decTitle,
         numberImage: numberImage);
 
+    // SubjectModel subjectModel =
+    //     SubjectModel(title: Title, subTitle: decTitle, color: numberImage);
+
+    // FirebaseFirestore.instance
+    //     .collection("Subject")
+    //     .doc(FId.id)
+    //     .set(subjectModel.toMap())
+    //     .then((value) {
+    //   emit(AddPostSuccessState2());
+    // }).catchError((error) {
+    //   emit(AddPostErrorState2(error));
+    // });
+
     FirebaseFirestore.instance
         .collection("Quizes")
         .doc(FId.id)

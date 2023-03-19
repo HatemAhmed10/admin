@@ -12,6 +12,12 @@ class AddSubjectFailure extends Choose_Subj_States {
   AddSubjectFailure(this.errMessage);
 }
 
+class SubjectsLoadingSuccess extends Choose_Subj_States {}
+
 class SubjectsSuccess extends Choose_Subj_States {}
 
 class ChangeActiveState extends Choose_Subj_States {}
+
+class AddSubjectSuccessState extends Choose_Subj_States {}
+
+class AddSubjectErrorState extends Choose_Subj_States {}

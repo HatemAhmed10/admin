@@ -1,4 +1,5 @@
 import 'package:admin/main.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -125,9 +126,10 @@ class Choose_Subject extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(
-                                    height: 32,
+                                    height: 12,
                                   ),
                                   MaterialButton(
+                                    color: Colors.blue,
                                     onPressed: () {
                                       var subjectModel = SubjectModel(
                                           title: text.text,
@@ -138,7 +140,10 @@ class Choose_Subject extends StatelessWidget {
                                       Navigator.pop(context);
                                     },
                                     child: Text("Add"),
-                                  )
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
                                 ],
                               ),
                             ),
@@ -152,54 +157,58 @@ class Choose_Subject extends StatelessWidget {
             appBar: AppBar(
               title: Text("Subject"),
             ),
-            body: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.all(30.0),
-                child: Column(
-                  children: <Widget>[
-                    Expanded(
-                        child: VerticalCardPager(
-                      textStyle: TextStyle(color: Colors.red),
-                      images: [
-                        for (int x = 0; x < cubit.subject.length; x++)
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(40),
-                            child: Image(
-                              image: KImage[cubit.subject[x].color],
+            body: ConditionalBuilder(
+              condition: state is! SubjectsLoadingSuccess,
+              builder: (context) => SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(30.0),
+                  child: Column(
+                    children: <Widget>[
+                      Expanded(
+                          child: VerticalCardPager(
+                        textStyle: TextStyle(color: Colors.red),
+                        images: [
+                          for (int x = 0; x < cubit.subject.length; x++)
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(40),
+                              child: Image(
+                                image: KImage[cubit.subject[x].color!],
+                              ),
                             ),
-                          ),
-                      ],
-                      titles: [
-                        for (int x = 0; x < cubit.subject.length; x++)
-                          "${cubit.subject[x].title}"
-                      ],
-                      onPageChanged: (page) {},
-                      onSelectedItem: (index) {
-                        switch (Next) {
-                          case "Learn":
-                            navigateTo(
-                                context,
-                                Learn_Home_Screen(
-                                  title: cubit.subject[index].title,
-                                  numberImage: cubit.subject[index].color,
-                                  subtitle: cubit.subject[index].subTitle,
-                                ));
-                            break;
-                          case "Quiz":
-                            navigateTo(
-                                context,
-                                Quiz_Home_Screen(
-                                  title: cubit.subject[index].title,
-                                  numberImage: cubit.subject[index].color,
-                                  subtitle: cubit.subject[index].subTitle,
-                                ));
-                            break;
-                        }
-                      },
-                    )),
-                  ],
+                        ],
+                        titles: [
+                          for (int x = 0; x < cubit.subject.length; x++)
+                            "${cubit.subject[x].title}"
+                        ],
+                        onPageChanged: (page) {},
+                        onSelectedItem: (index) {
+                          switch (Next) {
+                            case "Learn":
+                              navigateTo(
+                                  context,
+                                  Learn_Home_Screen(
+                                    title: cubit.subject[index].title!,
+                                    numberImage: cubit.subject[index].color!,
+                                    subtitle: cubit.subject[index].subTitle!,
+                                  ));
+                              break;
+                            case "Quiz":
+                              navigateTo(
+                                  context,
+                                  Quiz_Home_Screen(
+                                    title: cubit.subject[index].title!,
+                                    numberImage: cubit.subject[index].color!,
+                                    subtitle: cubit.subject[index].subTitle!,
+                                  ));
+                              break;
+                          }
+                        },
+                      )),
+                    ],
+                  ),
                 ),
               ),
+              fallback: (context) => Center(child: CircularProgressIndicator()),
             ),
           );
         },

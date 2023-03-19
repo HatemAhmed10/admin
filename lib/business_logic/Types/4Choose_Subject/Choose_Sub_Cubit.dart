@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:admin/data/models/1Type/4Choose-Subject/SubjectModel.dart';
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,8 +21,26 @@ class Choose_Subj_Cubit extends Cubit<Choose_Subj_States> {
     // subject.color = color.value;
     emit(AddSubjectLoading());
     try {
-      var subjectsBox = Hive.box<SubjectModel>(kSubjectBox);
-      await subjectsBox.add(subject);
+      // var subjectsBox = Hive.box<SubjectModel>(kSubjectBox);
+      // await subjectsBox.add(subject);
+
+      SubjectModel subjectModel = SubjectModel(
+          title: subject.title,
+          subTitle: subject.subTitle,
+          color: subject.color);
+
+      var FId = FirebaseFirestore.instance.collection('Subject').doc();
+
+      FirebaseFirestore.instance
+          .collection("Subject")
+          .doc(FId.id)
+          .set(subjectModel.toMap())
+          .then((value) {
+        emit(AddSubjectSuccessState());
+      }).catchError((error) {
+        emit(AddSubjectErrorState());
+      });
+
       emit(AddSubjectSuccess());
     } catch (e) {
       emit(AddSubjectFailure(e.toString()));
@@ -32,11 +51,22 @@ class Choose_Subj_Cubit extends Cubit<Choose_Subj_States> {
     // SubjectModel(title: "aas", subTitle: "sa", color: 1)
   ];
   fetchAllSubjects() {
-    var subjectsBox = Hive.box<SubjectModel>(kSubjectBox);
-    subject = subjectsBox.values.toList();
-    print("Tomas");
+    // var subjectsBox = Hive.box<SubjectModel>(kSubjectBox);
+    // subject = subjectsBox.values.toList();
+    // print(subject.toString());
+    emit(SubjectsLoadingSuccess());
+    subject = [];
+    FirebaseFirestore.instance
+        .collection('Subject')
+        .snapshots()
+        .listen((event) {
+      event.docs.forEach((element) {
+        subject.add(SubjectModel.fromJson(element.data()));
+      });
+      emit(SubjectsSuccess());
+    });
 
-    emit(SubjectsSuccess());
+    // emit(SubjectsSuccess());
   }
 
   int currentIndex = 0;

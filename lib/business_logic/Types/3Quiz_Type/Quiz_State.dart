@@ -26,3 +26,9 @@ class AddPostErrorState extends Quiz_States {
 }
 
 class AddPostLoadingState extends Quiz_States {}
+
+class AddPostSuccessState2 extends Quiz_States {}
+
+class AddPostErrorState2 extends Quiz_States {
+  AddPostErrorState2(error);
+}

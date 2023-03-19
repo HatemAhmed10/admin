@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../data/models/1Type/2Learn_Model/1Photo_Model.dart';
+import '../../../../../data/models/1Type/4Choose-Subject/SubjectModel.dart';
 import '../../../../1Choose_Type/Choose_Type_Cubit.dart';
 import 'Add_Photo_State.dart';
 import 'package:admin/shared/components/1Tooles/4CustomshowToast.dart';
@@ -122,10 +123,10 @@ class Add_Photo_Cubit extends Cubit<Add_Photo_States> {
     // Postdate.text = actualDate.toString();
     Timestamp nowDate = Timestamp.now();
 
-    var Id = FirebaseFirestore.instance.collection('Learn').doc();
+    var FId = FirebaseFirestore.instance.collection('Learn').doc();
 
     LearnModel model = LearnModel(
-      id: Id.id,
+      id: FId.id,
       text: Text,
       imageurl: FinaUrl,
       videourl: videourl,
@@ -136,9 +137,22 @@ class Add_Photo_Cubit extends Cubit<Add_Photo_States> {
       date: nowDate,
     );
 
+    // SubjectModel subjectModel = SubjectModel(
+    //     title: titleSubject, subTitle: subTitleSubject, color: numberOfImage);
+
+    // FirebaseFirestore.instance
+    //     .collection("Subject")
+    //     .doc(FId.id)
+    //     .set(subjectModel.toMap())
+    //     .then((value) {
+    //   emit(AddSubjectSuccessState());
+    // }).catchError((error) {
+    //   emit(AddSubjectErrorState());
+    // });
+
     FirebaseFirestore.instance
         .collection("Learn")
-        .doc(Id.id)
+        .doc(FId.id)
         .set(model.toMap())
         .then((value) {
       emit(UploadPhtoLearnSuccessState());

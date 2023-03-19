@@ -17,3 +17,7 @@ class SendUserInformationErrorState extends Add_Photo_States {}
 class UploadImageState extends Add_Photo_States {}
 
 class UploadImageLoadingState extends Add_Photo_States {}
+
+class AddSubjectSuccessState extends Add_Photo_States {}
+
+class AddSubjectErrorState extends Add_Photo_States {}

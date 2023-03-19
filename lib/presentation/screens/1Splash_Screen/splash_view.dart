@@ -30,11 +30,13 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _startDelay();
-    BlocProvider.of<Choose_Subj_Cubit>(context).fetchAllSubjects();
+    // BlocProvider.of<Choose_Subj_Cubit>(context).fetchAllSubjects();
   }
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<Choose_Subj_Cubit>(context).fetchAllSubjects();
+
     return Scaffold(
       // backgroundColor: ColorManager.primary,
       body: Container(
