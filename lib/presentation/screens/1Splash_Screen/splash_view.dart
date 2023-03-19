@@ -17,7 +17,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
   Timer? _timer;
 
   _startDelay() {
-    _timer = Timer(const Duration(seconds: 20), _goNext);
+    _timer = Timer(const Duration(seconds: 2), _goNext);
   }
 
   _goNext() {

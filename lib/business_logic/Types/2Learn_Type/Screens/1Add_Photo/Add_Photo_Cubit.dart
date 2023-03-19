@@ -1,22 +1,22 @@
-import 'package:admin/shared/components/1Tooles/4CustomshowToast.dart';
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
-
-import '../../../data/models/1Type/1News_Model/News_Model.dart';
-import 'News_State.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-// To upload Image To Firebase
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../data/models/1Type/2Learn_Model/1Photo_Model.dart';
+import '../../../../1Choose_Type/Choose_Type_Cubit.dart';
+import 'Add_Photo_State.dart';
+import 'package:admin/shared/components/1Tooles/4CustomshowToast.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
-class News_Cubit extends Cubit<News_States> {
-  News_Cubit() : super(NewsTypeInitialState());
+class Add_Photo_Cubit extends Cubit<Add_Photo_States> {
+  Add_Photo_Cubit() : super(Add_Photot_InitialState());
 
-  static News_Cubit get(context) => BlocProvider.of(context);
+  static Add_Photo_Cubit get(context) => BlocProvider.of(context);
 
   firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
@@ -39,8 +39,11 @@ class News_Cubit extends Cubit<News_States> {
     emit(UploadImageState());
   }
 
-  Future uploadFile({
-    required String text,
+  Future uploadFile2({
+    required String Text,
+    required String titleSubject,
+    required String subTitleSubject,
+    required int numberOfImage,
   }) async {
     emit(UploadImageLoadingState());
 
@@ -54,7 +57,15 @@ class News_Cubit extends Cubit<News_States> {
           .child('file/');
       await ref.putFile(photo!);
       FinaUrl = (await ref.getDownloadURL()).toString();
-      UploadNews(text: text, imageUrl: FinaUrl);
+      UploadPhtoLearn(
+        imageUrl: FinaUrl,
+        Text: Text,
+        videourl: "",
+        pdfurl: "",
+        titleSubject: titleSubject,
+        subTitleSubject: subTitleSubject,
+        numberOfImage: numberOfImage,
+      );
       emit(UploadImageState());
     } catch (e) {
       print('error occured');
@@ -92,12 +103,18 @@ class News_Cubit extends Cubit<News_States> {
         });
   }
 
-  //______________________________________________________
-  void UploadNews({
-    required String text,
+//_____________________________________________________________
+
+  void UploadPhtoLearn({
+    required String Text,
     required String imageUrl,
+    required String videourl,
+    required String pdfurl,
+    required String titleSubject,
+    required String subTitleSubject,
+    required int numberOfImage,
   }) {
-    emit(SendUserInformationLoadingSuccessState());
+    emit(UploadPhtoLearnLoadingSuccessState());
 
     // DateTime now = DateTime.now();
     // var formatterDate = DateFormat('dd/MM/yy');
@@ -105,23 +122,28 @@ class News_Cubit extends Cubit<News_States> {
     // Postdate.text = actualDate.toString();
     Timestamp nowDate = Timestamp.now();
 
-    var Id = FirebaseFirestore.instance.collection('News').doc();
+    var Id = FirebaseFirestore.instance.collection('Learn').doc();
 
-    NewsModel model = NewsModel(
+    LearnModel model = LearnModel(
       id: Id.id,
-      Text: text,
-      imageurl: imageUrl,
+      text: Text,
+      imageurl: FinaUrl,
+      videourl: videourl,
+      pdfurl: pdfurl,
+      titleSubject: titleSubject,
+      subTitleSubject: subTitleSubject,
+      numberOfImage: numberOfImage,
       date: nowDate,
     );
 
     FirebaseFirestore.instance
-        .collection("News")
+        .collection("Learn")
         .doc(Id.id)
         .set(model.toMap())
         .then((value) {
-      emit(SendUserInformationSuccessState());
+      emit(UploadPhtoLearnSuccessState());
     }).catchError((error) {
-      emit(SendUserInformationErrorState());
+      emit(UploadPhtoLearnErrorState());
     });
   }
 }

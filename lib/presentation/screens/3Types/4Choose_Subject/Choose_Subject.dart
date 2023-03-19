@@ -112,7 +112,7 @@ class Choose_Subject extends StatelessWidget {
                                               decoration:
                                                   index == cubit.currentIndex
                                                       ? BoxDecoration(
-                                                          color: Colors.red)
+                                                          color: Colors.white)
                                                       : BoxDecoration(
                                                           color: Colors.white),
                                               child: Image(
