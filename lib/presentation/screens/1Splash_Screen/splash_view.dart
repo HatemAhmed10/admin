@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../business_logic/Types/4Choose_Subject/Choose_Sub_Cubit.dart';
 import '../../../shared/components/1Tooles/5Custom_Navigate.dart';
 import '../../../shared/styles/assets_manager.dart';
 import '../../../shared/styles/colors.dart';
@@ -28,6 +30,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _startDelay();
+    BlocProvider.of<Choose_Subj_Cubit>(context).fetchAllSubjects();
   }
 
   @override
