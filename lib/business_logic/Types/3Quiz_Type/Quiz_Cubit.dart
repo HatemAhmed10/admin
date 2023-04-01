@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../data/models/1Type/3QuizModel/PostModel.dart';
+import '../../../data/models/1Type/3QuizModel/QuizModel.dart';
 import '../../../data/models/1Type/3QuizModel/QuestionModel.dart';
 import '../../../data/models/1Type/4Choose-Subject/SubjectModel.dart';
 import 'Quiz_State.dart';
@@ -77,6 +77,7 @@ class Quiz_Cubit extends Cubit<Quiz_States> {
     required List FQuestion,
     required List<Map<String, List>>? FAnswer,
     required List? FcorrectAnswer,
+    required SubjectModel subjectModel,
   }) {
     emit(AddPostLoadingState());
 
@@ -86,65 +87,69 @@ class Quiz_Cubit extends Cubit<Quiz_States> {
         .collection('Posts')
         .doc();
 
-    PostModel model = PostModel(
-        Id: FId.id,
-        QuizTime: QuizTime,
-        title: Title,
-        desc: Desc,
-        date: Date,
-        Users: [
-          {"name": "", "degree": 0}
-        ],
-        // Users: [
-        //   {"name": "Hatem2", "degree": 40},
-        //   {"name": "saad2", "degree": 101},
-        //   {"name": "ahmed2", "degree": 2100},
-        //   {"name": "Hatedsadm2", "degree": 80},
-        // ],
-        imageUrl: "سيشسيشسيشس",
-        dectitle: decTitle,
-        numberImage: numberImage);
-
-    // SubjectModel subjectModel =
-    //     SubjectModel(title: Title, subTitle: decTitle, color: numberImage);
-
-    // FirebaseFirestore.instance
-    //     .collection("Subject")
-    //     .doc(FId.id)
-    //     .set(subjectModel.toMap())
-    //     .then((value) {
-    //   emit(AddPostSuccessState2());
-    // }).catchError((error) {
-    //   emit(AddPostErrorState2(error));
-    // });
-
-    FirebaseFirestore.instance
-        .collection("Quizes")
-        .doc(FId.id)
-        .set(model.toMap())
-        .then((value) {
-      emit(AddPostSuccessState());
-    }).catchError((error) {
-      emit(AddPostErrorState(error));
-    });
-
-    QuestionModel questionModel = QuestionModel(
+    QuizModel quizModel = QuizModel(
+      QuizId: FId.id,
+      QuizTime: QuizTime,
+      Quiztitle: Title,
+      Quizdesc: Desc,
+      date: Date,
+      titleimage: subjectModel.title,
+      subTitleimage: subjectModel.subTitle,
+      numberimage: subjectModel.color,
+      QuizUsers: [
+        {"name": "", "degree": 0}
+      ],
       Question: FQuestion,
       Answer: FAnswer,
       correctAnswer: FcorrectAnswer,
     );
 
+    // PostModel model = PostModel(
+    //     Id: FId.id,
+    //     QuizTime: QuizTime,
+    //     title: Title,
+    //     desc: Desc,
+    //     date: Date,
+    //     Users: [
+    //       {"name": "", "degree": 0}
+    //     ],
+    //     // Users: [
+    //     //   {"name": "Hatem2", "degree": 40},
+    //     //   {"name": "saad2", "degree": 101},
+    //     //   {"name": "ahmed2", "degree": 2100},
+    //     //   {"name": "Hatedsadm2", "degree": 80},
+    //     // ],
+    //     imageUrl: "سيشسيشسيشس",
+    //     dectitle: decTitle,
+    //     numberImage: numberImage);
+
     FirebaseFirestore.instance
         .collection("Quizes")
         .doc(FId.id)
-        .collection("Question")
-        .doc("Data")
-        .set(questionModel.toMap())
+        .set(quizModel.toMap())
         .then((value) {
       emit(AddPostSuccessState());
     }).catchError((error) {
       emit(AddPostErrorState(error));
     });
+
+    // QuestionModel questionModel = QuestionModel(
+    //   Question: FQuestion,
+    //   Answer: FAnswer,
+    //   correctAnswer: FcorrectAnswer,
+    // );
+
+    // FirebaseFirestore.instance
+    //     .collection("Quizes")
+    //     .doc(FId.id)
+    //     .collection("Question")
+    //     .doc("Data")
+    //     .set(questionModel.toMap())
+    //     .then((value) {
+    //   emit(AddPostSuccessState());
+    // }).catchError((error) {
+    //   emit(AddPostErrorState(error));
+    // });
   }
 
   ////////////////////////////////////////////////////////////////

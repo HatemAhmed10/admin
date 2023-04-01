@@ -16,6 +16,7 @@ class Choose_Type_Cubit extends Cubit<Choose_Type_States> {
     const AssetImage(ImageAssets.News_Image),
     const AssetImage(ImageAssets.Learn_Image),
     const AssetImage(ImageAssets.Quiz_Image),
+    const AssetImage(ImageAssets.Quiz_Image),
   ];
   final List<dynamic> Type_Content = [
     {
@@ -28,6 +29,10 @@ class Choose_Type_Cubit extends Cubit<Choose_Type_States> {
     },
     {
       'title': 'Add Quiz ',
+      'description': '',
+    },
+    {
+      'title': 'Add Users ',
       'description': '',
     },
   ];

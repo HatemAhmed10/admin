@@ -20,31 +20,29 @@ class Choose_Subj_Cubit extends Cubit<Choose_Subj_States> {
   addSubject(SubjectModel subject) async {
     // subject.color = color.value;
     emit(AddSubjectLoading());
-    try {
-      // var subjectsBox = Hive.box<SubjectModel>(kSubjectBox);
-      // await subjectsBox.add(subject);
+    // try {
+    // var subjectsBox = Hive.box<SubjectModel>(kSubjectBox);
+    // await subjectsBox.add(subject);
 
-      SubjectModel subjectModel = SubjectModel(
-          title: subject.title,
-          subTitle: subject.subTitle,
-          color: subject.color);
+    SubjectModel subjectModel = SubjectModel(
+        title: subject.title, subTitle: subject.subTitle, color: subject.color);
 
-      var FId = FirebaseFirestore.instance.collection('Subject').doc();
+    var FId = FirebaseFirestore.instance.collection('Subject').doc();
 
-      FirebaseFirestore.instance
-          .collection("Subject")
-          .doc(FId.id)
-          .set(subjectModel.toMap())
-          .then((value) {
-        emit(AddSubjectSuccessState());
-      }).catchError((error) {
-        emit(AddSubjectErrorState());
-      });
+    FirebaseFirestore.instance
+        .collection("Subject")
+        .doc(FId.id)
+        .set(subjectModel.toMap())
+        .then((value) {
+      emit(AddSubjectSuccessState());
+    }).catchError((error) {
+      emit(AddSubjectErrorState());
+    });
 
-      emit(AddSubjectSuccess());
-    } catch (e) {
-      emit(AddSubjectFailure(e.toString()));
-    }
+    // emit(AddSubjectSuccess());
+    // } catch (e) {
+    //   emit(AddSubjectFailure(e.toString()));
+    // }
   }
 
   List<SubjectModel> subject = [
@@ -55,11 +53,13 @@ class Choose_Subj_Cubit extends Cubit<Choose_Subj_States> {
     // subject = subjectsBox.values.toList();
     // print(subject.toString());
     emit(SubjectsLoadingSuccess());
-    subject = [];
+    subject.clear();
     FirebaseFirestore.instance
         .collection('Subject')
         .snapshots()
         .listen((event) {
+      subject.clear();
+
       event.docs.forEach((element) {
         subject.add(SubjectModel.fromJson(element.data()));
       });

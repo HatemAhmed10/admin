@@ -35,6 +35,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^2.7.1
   firebase_storage: ^11.0.15
+  firebase_auth: ^4.4.0
   image_picker: ^0.8.7
   
 
@@ -67,7 +68,7 @@ dependencies:
   vertical_card_pager: ^1.5.0
 
   video_player: 
-  
+
 dev_dependencies:
   hive_generator:  
   build_runner: 

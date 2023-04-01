@@ -18,6 +18,7 @@ void main() async {
   await Hive.openBox<SubjectModel>(kSubjectBox);
 
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

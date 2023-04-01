@@ -136,7 +136,7 @@ class Choose_Subject extends StatelessWidget {
                                           subTitle: dec.text,
                                           color: cubit.currentIndex);
                                       cubit.addSubject(subjectModel);
-                                      cubit.fetchAllSubjects();
+                                      // cubit.fetchAllSubjects();
                                       Navigator.pop(context);
                                     },
                                     child: Text("Add"),

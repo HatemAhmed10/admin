@@ -1,3 +1,4 @@
+import 'package:admin/data/models/1Type/4Choose-Subject/SubjectModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/cupertino.dart';
@@ -360,6 +361,10 @@ class Quiz_Home_Screen extends StatelessWidget {
                                       numberImage: numberImage,
                                       Desc: Postdesc.text,
                                       Date: nowDate,
+                                      subjectModel: SubjectModel(
+                                          title: title,
+                                          subTitle: subtitle,
+                                          color: numberImage),
                                       FQuestion: cubit.InputQuestion,
                                       FAnswer: cubit.InputAnswer,
                                       FcorrectAnswer: cubit.InputCorrectAnswer,

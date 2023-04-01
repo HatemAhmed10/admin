@@ -10,6 +10,8 @@ import '../3Types/1News/News_Home.dart';
 import '../3Types/2Learn/Learn_Home.dart';
 import '../3Types/3Quiz/Quiz_Home.dart';
 import '../3Types/4Choose_Subject/Choose_Subject.dart';
+import '../3Types/5Add_Users/Add_User_Home.dart';
+import '../3Types/5Add_Users/Show_Users_Home.dart';
 
 class ChangeTypeScreen extends StatelessWidget {
   const ChangeTypeScreen({super.key});
@@ -68,6 +70,12 @@ class ChangeTypeScreen extends StatelessWidget {
                               case 2:
                                 navigateTo(
                                     context, Choose_Subject(Next: "Quiz"));
+                                // context,
+                                // Choose_Subject());
+
+                                break;
+                              case 3:
+                                navigateTo(context, Show_Users_Screen());
                                 // context,
                                 // Choose_Subject());
 
